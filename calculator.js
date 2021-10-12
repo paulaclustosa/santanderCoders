@@ -28,7 +28,7 @@ const createCalculator = () => {
     history = [
       ...history,
       {
-        operation: `${x}${operator}${y}`,
+        operator: `${x}${operator}${y}`,
         result
       }
     ];
