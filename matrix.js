@@ -8,6 +8,6 @@ const movieTheaterVisitors = [
 
 const canWatchMatrix = movieTheaterVisitors.map((visitor) =>
   visitor.age >= 18
-    ? `${visitor.name} can to do The Matrix)`
+    ? `${visitor.name} can go to The Matrix.`
     : `${visitor.name} is under age!`
 );
