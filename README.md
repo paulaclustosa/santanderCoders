@@ -41,9 +41,10 @@ _A calculator module!_
 ## Classes (and Polymorphism)
 
 * Create three classes named "Person", "Teacher", and "Student" that follow the following rules:
+* **File reference: classes-polymorphism.js**
 
 <p align="center" width="100%">
-    <img width="80%" src="https://user-images.githubusercontent.com/86850247/138017475-5b470cef-f4d9-45d8-9c0a-cf8585344660.png">
+    <img width="80%" src="https://user-images.githubusercontent.com/86850247/138019298-5573cf75-445e-476b-8190-9f7846fceaad.png">
 </p>
 
 ## The Reading List
