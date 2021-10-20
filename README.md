@@ -20,7 +20,7 @@ _Let's have some fun practicing what we learned about arrays methods._
 
 _Let's have some fun practicing what we learned about arrays methods._
 
-* Given a serie of potential electors, return an object that represents the election result with the total number of potential voters and actual total number of votes according to three age ranges: from 18 to 25 years old, from 26 to 35 years old and from 36 to 55 years old.
+* Given a serie of potential electors, return an object that represents the election results with the total number of potential voters and actual total number of votes according to three age ranges: from 18 to 25 years old, from 26 to 35 years old, and from 36 to 55 years old.
 * **File reference: voters.js**
 
 <p align="center" width="100%">
@@ -31,7 +31,7 @@ _Let's have some fun practicing what we learned about arrays methods._
 
 _A calculator module!_
 
-* Create a calculator module that has four functions: "enter", "equals", "list", and "reset". The function named "enter" has to register the input number and/or operator. The function named "equals" has to return the operation's result. The function called "list" shows a history of all operations and its results. Finally, the function called "reset" has to clear operations and its results history.
+* Create a calculator module that has four functions: "enter", "equals", "list", and "reset". The function named "enter" has to register the input number and/or operator. The function named "equals" has to return the operation's result. The function called "list" shows a history of all operations and its results. Finally, the function called "reset" has to clear operation's and its results history.
 * **File reference: calculator.js**
 
 <p align="center" width="100%">
@@ -40,7 +40,7 @@ _A calculator module!_
 
 ## Classes (and Polymorphism)
 
-* Create three classes named "Person", "Teacher", and "Student" that follow the following rules:
+* Create three classes named "Person", "Teacher", and "Student". Each class should have properties and methods as shown at the image below.
 * **File reference: classes-polymorphism.js**
 
 <p align="center" width="100%">
