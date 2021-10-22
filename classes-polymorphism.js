@@ -1,7 +1,6 @@
 class Person {
     constructor(firstName, lastName, age, gender, interests) {
         this.name = [firstName, lastName];
-        this.lastName = lastName;
         this.age = age;
         this.gender = gender;
         this.interests = interests;
