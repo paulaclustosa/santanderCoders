@@ -1,40 +1,36 @@
 class Person {
-    constructor(firstName, lastName, age, gender, interest) {
-        this.firstName = firstName;
+    constructor(firstName, lastName, age, gender, interests) {
+        this.name = [firstName, lastName];
         this.lastName = lastName;
         this.age = age;
         this.gender = gender;
-        this.interest = interest;
-    }
-
-    name() {
-        return `${this.firstName} ${this.lastName}`;
+        this.interests = interests;
     }
 
     bio() {
-        return `{${this.firstName} ${this.lastName} is ${this.age} years old. They like ${this.interests}.`
+        return `${this.name[0]} ${this.name[1]} is ${this.age} years old. He/She likes ${this.interests}.`
     }
 
     greeting() {
-        return `Hi! I'm ${this.firstName} ${this.lastName}`
+        return `Hi! I'm ${this.name[0]} ${this.name[1]}.`
     }
 }
 
 class Teacher extends Person {
-    constructor(subject) {
-        super(subject);
+    constructor(firstName, lastName, age, gender, interests, subject) {
+        super(firstName, lastName, age, gender, interests)
 
         this.subject = subject;
     }
 
     greeting() {
-        return `Hello! My name is Ms/Mr ${this.lastName}, and I teach ${subject}`
+        return `Hello! My name is Ms/Mr ${this.name[1]}, and I teach ${this.subject}.`
     }
 }
 
 class Student extends Person {
 
     greeting() {
-        return `Yo! I'm ${this.firstName}.`
+        return `Yo! I'm ${this.name[0]}.`
     }
 }
