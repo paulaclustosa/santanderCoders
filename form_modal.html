@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Modal</title>
+    <link rel="stylesheet" href="registration-module.css" />
+    <style>
+      :root {
+        --base-unit: 6px;
+        --small-unit: var(--base-unit);
+        --regular-unit: calc(2 * var(--base-unit));
+        --large-unit: calc(3 * var(--base-unit));
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+        background-color: #fff7d6;
+      }
+
+      #container {
+        max-width: 1200px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .modal {
+        background-color: lightgrey;
+        border: 0.1em solid black;
+        box-shadow: 0 0 1em #76bacb;
+        display: flex;
+        height: 350px;
+        justify-content: center;
+        left: calc(50% - 200px);
+        opacity: 1;
+        position: fixed;
+        transition: 150ms all ease;
+        top: calc(50% - 175px);
+        width: 400px;
+      }
+
+      .modal:not(.--is-open) {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.6);
+      }
+
+      form {
+        background-color: lightcyan;
+        display: flex;
+        flex-direction: column;
+        font-weight: bold;
+        margin: var(--small-unit);
+        width: 225px;
+      }
+
+      label {
+        background-color: lightcyan;
+        display: flex;
+        flex-direction: column;
+        margin: var(--small-unit) var(--small-unit);
+      }
+
+      input {
+        border: 0.1em solid black;
+        padding: var(--small-unit) 0;
+      }
+
+      .alert_user {
+        color: red;
+        background-color: transparent;
+        font-size: small;
+        font-style: italic;
+        font-weight: normal;
+        padding-top: calc(var(--small-unit) / 2);
+        opacity: 1;
+      }
+
+      .alert_user:not(.--alert-message) {
+        opacity: 0;
+      }
+
+      .button {
+        background-color: black;
+        align-self: center;
+        border: 0.1em solid black;
+        border-radius: 0.5em;
+        color: white;
+        cursor: pointer;
+        width: 100px;
+        margin: var(--small-unit);
+        padding: var(--small-unit);
+        transition: box-shadow 400ms, transform 400ms, background-color 400ms;
+      }
+
+      .button:hover {
+        background-color: rgb(58, 56, 56);
+        box-shadow: 0 0 1em lightgrey;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <h1>Registration form</h1>
+      <button class="button" name="open-form" type="button">Click here</button>
+
+      <div class="modal">
+        <form>
+          <label
+            >First name
+            <input type="text" required />
+            <div class="alert_user" id="first_name" role="alert">
+              Enter your first name
+            </div>
+          </label>
+
+          <label
+            >Last name
+            <input type="text" required />
+            <div class="alert_user" id="last_name" role="alert">
+              Enter your last name
+            </div>
+          </label>
+
+          <label
+            >Email
+            <input type="email" required />
+            <div class="alert_user" id="email" role="alert">
+              Enter your email
+            </div>
+          </label>
+
+          <button
+            class="button"
+            name="submit"
+            onclick="formModal.alertRequiredInput()"
+            type="submit"
+          >
+            Ok
+          </button>
+          <button
+            class="button"
+            name="cancel"
+            onclick="formModal.cancel()"
+            type="button"
+          >
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const btnOpenForm = document.querySelector('button[name="open-form"]');
+
+      btnOpenForm.onclick = function () {
+        formModal.open({
+          fail: () => {
+            console.log("User cancelled form");
+          },
+          success: (userInput) => {
+            const user = {
+              name: `${userInput[0].value} ${userInput[1].value}`,
+              email: `${userInput[2].value}`
+            };
+            console.log("A new user has been registered", user);
+          }
+        });
+      };
+
+      const formModal = (function () {
+        let _failRegister;
+        let _successRegister;
+
+        const _modal = document.querySelector(".modal");
+        const _form = document.querySelector("form");
+        const _input = document.querySelectorAll("input");
+
+        const _CLASS_OPEN = "--is-open";
+        const _CLASS_ALERT = "--alert-message";
+
+        function close() {
+          _modal.classList.remove(_CLASS_OPEN);
+        }
+
+        function resetForm() {
+          _form.reset();
+        }
+
+        function removeAlertRequiredInput() {
+          _input.forEach((input_i) => {
+            input_i.nextElementSibling.classList.remove(_CLASS_ALERT);
+          });
+        }
+
+        function open(settings) {
+          _modal.classList.add(_CLASS_OPEN);
+
+          if (settings.fail) {
+            _failRegister = settings.fail;
+          }
+
+          if (settings.success) {
+            _successRegister = settings.success;
+          }
+
+          _form.onsubmit = function (event) {
+            event.preventDefault();
+
+            _successRegister([..._input]);
+            close();
+            resetForm();
+          };
+        }
+
+        function cancel() {
+          _failRegister();
+          removeAlertRequiredInput();
+          close();
+        }
+
+        function alertRequiredInput() {
+          _input.forEach((input_i) => {
+            if (input_i.attributes.required && !input_i.value) {
+              input_i.nextElementSibling.classList.add(_CLASS_ALERT);
+            }
+
+            if (input_i.attributes.required && input_i.value) {
+              input_i.nextElementSibling.classList.remove(_CLASS_ALERT);
+            }
+          });
+        }
+
+        return {
+          open,
+          cancel,
+          alertRequiredInput
+        };
+      })();
+    </script>
+  </body>
+</html>
